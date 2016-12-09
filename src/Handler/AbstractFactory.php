@@ -28,7 +28,7 @@ abstract class AbstractFactory
         ];
     }
 
-    protected final function getHandlers()
+    final protected function getHandlers()
     {
         return array_merge(
             $this->getDefaultHandlers(),
