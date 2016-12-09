@@ -1,6 +1,6 @@
 <?php
 
-namespace  Nayjest\Querying\Test;
+namespace Nayjest\Querying\Test;
 
 use Nayjest\Querying\ArrayQuery;
 use Nayjest\Querying\Operation\AddFieldOperation;
@@ -18,6 +18,7 @@ class ArrayQueryTest extends PHPUnit_Framework_TestCase
     {
         return new ArrayQuery($src, $rowClass);
     }
+
     public function testConstruct()
     {
         $this->make();
@@ -78,11 +79,11 @@ class ArrayQueryTest extends PHPUnit_Framework_TestCase
             new FilterOperation('id', FilterOperation::OPERATOR_LTE, 7),
             new FilterOperation('id', FilterOperation::OPERATOR_NOT_EQ, 3),
             new FilterOperation('id', FilterOperation::OPERATOR_NOT_EQ, 2),
-            new AddFieldOperation('id2', function(RowInterface $row) {
+            new AddFieldOperation('id2', function (RowInterface $row) {
                 return $row->get('id') * 2;
             }),
             new SortOperation('id', 'desc'),
-            new PaginateOperation(2,3)
+            new PaginateOperation(2, 3)
         ]);
         $data = $q->getArray();
         self::assertTrue($data[0]->get('id2') === 8);

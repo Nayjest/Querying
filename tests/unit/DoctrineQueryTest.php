@@ -3,16 +3,10 @@
 namespace  Nayjest\Querying\Test;
 
 use Doctrine\DBAL\Query\QueryBuilder;
-use Nayjest\Querying\ArrayQuery;
 use Nayjest\Querying\DoctrineQuery;
-use Nayjest\Querying\Operation\AddFieldOperation;
-use Nayjest\Querying\Operation\DummyOperation;
 use Nayjest\Querying\Operation\FilterOperation;
 use Nayjest\Querying\Operation\PaginateOperation;
 use Nayjest\Querying\Operation\SortOperation;
-use Nayjest\Querying\Row\ArrayRow;
-use Nayjest\Querying\Row\ObjectRow;
-use Nayjest\Querying\Row\RowInterface;
 use PHPUnit_Framework_TestCase;
 
 class DoctrineQueryTest extends PHPUnit_Framework_TestCase
