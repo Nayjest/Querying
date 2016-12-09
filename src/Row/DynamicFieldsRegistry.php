@@ -37,5 +37,6 @@ class DynamicFieldsRegistry
         foreach(array_keys($this->dynamicFields) as $name) {
             $res[$name] = $this->get($name, $row);
         }
+        return $res;
     }
 }
