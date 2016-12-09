@@ -2,12 +2,10 @@
 
 namespace Nayjest\Querying\Handler;
 
-use Nayjest\Querying\Operation\CustomOperation;
-
 /**
  * Class CustomHandler
  *
- * @property CustomOperation $operation
+ * @property \Nayjest\Querying\Operation\CustomOperation $operation
  */
 class CustomHandler extends AbstractHandler
 {
