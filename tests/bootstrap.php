@@ -98,4 +98,8 @@ function prepare_eloquent() {
 
 $dotEnv = new Dotenv(TESTS_DIR);
 $dotEnv->load();
+if (!file_exists(BUILD_DIR)) {
+    mkdir(BUILD_DIR, 0777);
+}
 create_database();
+prepare_eloquent();

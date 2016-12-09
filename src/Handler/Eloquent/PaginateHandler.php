@@ -29,7 +29,7 @@ class PaginateHandler extends AbstractPaginateHandler
     {
         /** @var PaginateOperation $operation */
         $operation = $this->operation;
-        $src->limit($operation->getPageSize())
+        return $src->limit($operation->getPageSize())
             ->offset($this->getOffset($operation));
     }
 }

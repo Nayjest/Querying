@@ -12,9 +12,6 @@ use Traversable;
 
 abstract class AbstractQuery
 {
-    /**
-     * @var array
-     */
     private $dataSource;
     /**
      * @var OperationInterface[]
@@ -121,5 +118,10 @@ abstract class AbstractQuery
             $this->addOperation($operation);
         }
         return $this;
+    }
+
+    public function getSrc()
+    {
+        return $this->dataSource;
     }
 }
