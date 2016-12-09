@@ -2,6 +2,7 @@
 
 namespace Nayjest\Querying;
 
+use Exception;
 use Nayjest\Querying\Handler\AbstractFactory;
 use Nayjest\Querying\Handler\HandlerInterface;
 use Nayjest\Querying\Operation\HydrateOperation;
@@ -86,7 +87,7 @@ abstract class AbstractQuery
     public function getArray()
     {
         $data = $this->get();
-        return is_array($data)?$data:iterator_to_array($data);
+        return is_array($data) ? $data : iterator_to_array($data);
     }
 
     /**
@@ -96,7 +97,7 @@ abstract class AbstractQuery
     {
         $data = $this->get();
         $res = [];
-        foreach($data as $row) {
+        foreach ($data as $row) {
             $res[] = $row->getSrc();
         }
         return $res;
@@ -116,6 +117,22 @@ abstract class AbstractQuery
     {
         foreach ($operations as $operation) {
             $this->addOperation($operation);
+        }
+        return $this;
+    }
+
+    public function hasOperation(OperationInterface $operation)
+    {
+        return in_array($operation, $this->operations);
+    }
+
+    public function removeOperation(OperationInterface $operation)
+    {
+        if ($this->hasOperation($operation)) {
+            $key = array_search($operation, $this->operations);
+            unset($this->operations[$key]);
+        } else {
+            throw new Exception("Trying to remove unexisting operation from query");
         }
         return $this;
     }
