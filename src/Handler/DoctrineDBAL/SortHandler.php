@@ -8,7 +8,7 @@ use Doctrine\DBAL\Query\QueryBuilder;
 use Nayjest\Querying\Operation\SortOperation;
 
 /**
- * SortOperation processing for DoctrineDataProvider.
+ * SortOperation handler for Doctrine.
  *
  * @see SortOperation
  */

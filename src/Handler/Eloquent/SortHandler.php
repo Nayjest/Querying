@@ -8,7 +8,7 @@ use Nayjest\Querying\Operation\SortOperation;
 use Illuminate\Database\Eloquent\Builder;
 
 /**
- * SortOperation processing for DoctrineDataProvider.
+ * SortOperation handler for Eloquent.
  *
  * @see SortOperation
  */
