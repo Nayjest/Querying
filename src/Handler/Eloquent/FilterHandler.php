@@ -15,11 +15,6 @@ use Illuminate\Database\Eloquent\Builder;
  */
 class FilterHandler extends AbstractDatabaseFilterHandler
 {
-    public function getPriority()
-    {
-        return Priority::MAIN;
-    }
-
     /**
      * Applies operation to data source and returns modified data source.
      *
