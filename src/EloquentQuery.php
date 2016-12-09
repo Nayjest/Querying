@@ -2,6 +2,7 @@
 
 namespace Nayjest\Querying;
 
+use Exception;
 use Illuminate\Database\Query\Builder;
 use Nayjest\Querying\Exception\ManualInterruptProcessingException;
 use Nayjest\Querying\Handler\Eloquent\Factory;
@@ -17,20 +18,28 @@ class EloquentQuery extends AbstractQuery
     }
 
     /**
-     * @return Builder;
+     * @return Builder
+     * @throws Exception
      */
     public function getReadyQuery()
     {
+        /** @var Builder $readyQuery */
         $readyQuery = null;
-        $this->addOperation(
-            new CustomOperation(function (Builder $query) use (&$readyQuery) {
+        $operation = new CustomOperation(
+            function (Builder $query) use (&$readyQuery) {
                 $readyQuery = $query;
                 throw new ManualInterruptProcessingException;
-            }, Priority::HYDRATE - 2)
+            },
+            Priority::HYDRATE - 2
         );
+        $this->addOperation($operation);
         try {
             $this->get();
         } catch (ManualInterruptProcessingException $e) {
+        }
+        $this->removeOperation($operation);
+        if (!$readyQuery instanceof Builder) {
+            throw new Exception("Failed to interrupt processing for extracting query object.");
         }
         return $readyQuery;
     }

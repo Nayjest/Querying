@@ -55,6 +55,14 @@ class EloquentQueryTest extends PHPUnit_Framework_TestCase
             new SortOperation('id', 'desc'),
             new PaginateOperation(2,5)
         ]);
+        $sql = $q->getSQL();
+        self::assertTrue(str_contains(strtolower($sql), [
+            'select',
+            'from',
+            'test_users',
+            'where',
+            'id',
+        ]));
         $data = $q->getArray();
         self::assertTrue($data[0]->get('id') == 15);
         self::assertTrue($data[1]->get('id') == 13);

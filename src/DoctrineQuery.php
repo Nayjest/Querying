@@ -3,6 +3,7 @@
 namespace Nayjest\Querying;
 
 use Doctrine\DBAL\Query\QueryBuilder;
+use Exception;
 use Nayjest\Querying\Exception\ManualInterruptProcessingException;
 use Nayjest\Querying\Handler\DoctrineDBAL\Factory;
 use Nayjest\Querying\Handler\Priority;
@@ -19,24 +20,36 @@ class DoctrineQuery extends AbstractQuery
     }
 
     /**
-     * @return QueryBuilder;
+     * @return QueryBuilder
+     * @throws Exception
      */
     public function getReadyQuery()
     {
+        /** @var QueryBuilder $readyQuery */
         $readyQuery = null;
-        $this->addOperation(
-            new CustomOperation(function (QueryBuilder $query) use (&$readyQuery) {
+        $operation = new CustomOperation(
+            function (QueryBuilder $query) use (&$readyQuery) {
                 $readyQuery = $query;
                 throw new ManualInterruptProcessingException;
-            }, Priority::HYDRATE - 2)
+            },
+            Priority::HYDRATE - 2
         );
+        $this->addOperation($operation);
         try {
             $this->get();
         } catch (ManualInterruptProcessingException $e) {
         }
+        $this->removeOperation($operation);
+        if (!$readyQuery instanceof QueryBuilder) {
+            throw new Exception("Failed to interrupt processing for extracting query object.");
+        }
         return $readyQuery;
     }
 
+    /**
+     * @return string
+     * @throws Exception
+     */
     public function getSQL()
     {
         return $this->getReadyQuery()->getSQL();
