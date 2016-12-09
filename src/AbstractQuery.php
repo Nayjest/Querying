@@ -2,7 +2,9 @@
 
 namespace Nayjest\Querying;
 
+use ArrayIterator;
 use Exception;
+use IteratorAggregate;
 use Nayjest\Querying\Handler\AbstractFactory;
 use Nayjest\Querying\Handler\HandlerInterface;
 use Nayjest\Querying\Operation\HydrateOperation;
@@ -10,7 +12,7 @@ use Nayjest\Querying\Operation\OperationInterface;
 use Nayjest\Querying\Row\DynamicFieldsRegistry;
 use Nayjest\Querying\Row\RowInterface;
 
-abstract class AbstractQuery
+abstract class AbstractQuery implements IteratorAggregate
 {
     private $dataSource;
     /**
@@ -36,6 +38,16 @@ abstract class AbstractQuery
         $this->dynamicFields = new DynamicFieldsRegistry();
         $this->operations = [new HydrateOperation($rowClass, $this->dynamicFields)];
         $this->initialize();
+    }
+
+    public function getIterator()
+    {
+        $data = $this->get();
+        if (is_array($data)) {
+            return new ArrayIterator($data);
+        } else {
+            return $data;
+        }
     }
 
     protected function initialize()
