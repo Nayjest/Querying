@@ -13,7 +13,6 @@ use PDO;
 
 class DoctrineQuery extends AbstractQuery
 {
-
     public function __construct(QueryBuilder $dataSource)
     {
         parent::__construct($dataSource, ObjectRow::class);
