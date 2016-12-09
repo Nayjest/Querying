@@ -9,7 +9,6 @@ use Nayjest\Querying\Operation\HydrateOperation;
 use Nayjest\Querying\Operation\OperationInterface;
 use Nayjest\Querying\Row\DynamicFieldsRegistry;
 use Nayjest\Querying\Row\RowInterface;
-use Traversable;
 
 abstract class AbstractQuery
 {
@@ -74,7 +73,7 @@ abstract class AbstractQuery
     }
 
     /**
-     * @return RowInterface[]|Traversable
+     * @return RowInterface[]|\Traversable
      */
     public function get()
     {
