@@ -1,0 +1,36 @@
+{
+    "name": "nayjest/querying",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Vitalii [Nayjest] Stepanenko",
+            "email": "mail@vitaliy.in",
+            "role": "Developer"
+        }
+    ],
+    "require": {},
+    "require-dev": {
+        "phpunit/phpunit": "^5.7",
+        "doctrine/dbal": "^2.5",
+        "vlucas/phpdotenv": "^2.4",
+        "illuminate/database": "^5.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "Nayjest\\Querying\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Nayjest\\Querying\\Test\\": "tests/unit"
+        }
+    },
+    "support": {
+        "email": "mail@vitaliy.in"
+    },
+    "scripts": {
+        "test": "php vendor/phpunit/phpunit/phpunit",
+        "unit-test": "php vendor/phpunit/phpunit/phpunit --testsuite unit"
+    }
+}
