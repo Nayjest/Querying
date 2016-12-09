@@ -42,6 +42,7 @@ class EloquentQuery extends AbstractQuery
         if (!$readyQuery instanceof Builder) {
             throw new Exception("Failed to interrupt processing for extracting query object.");
         }
+        return $readyQuery;
     }
 
     public function getSQL()
