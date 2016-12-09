@@ -1,5 +1,6 @@
 {
     "name": "nayjest/querying",
+    "description": "Data querying package for PHP",
     "type": "library",
     "license": "MIT",
     "authors": [
