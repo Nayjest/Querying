@@ -36,12 +36,12 @@ class EloquentQuery extends AbstractQuery
         try {
             $this->get();
         } catch (ManualInterruptProcessingException $e) {
+            // This exception is expected, don't needs further processing
         }
         $this->removeOperation($operation);
         if (!$readyQuery instanceof Builder) {
             throw new Exception("Failed to interrupt processing for extracting query object.");
         }
-        return $readyQuery;
     }
 
     public function getSQL()
