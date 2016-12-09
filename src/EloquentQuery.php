@@ -39,7 +39,7 @@ class EloquentQuery extends AbstractQuery
             // This exception is expected, don't needs further processing
         }
         $this->removeOperation($operation);
-        if (!$readyQuery instanceof Builder) {
+        if (!($readyQuery instanceof Builder)) {
             throw new Exception("Failed to interrupt processing for extracting query object.");
         }
         return $readyQuery;

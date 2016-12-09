@@ -3,7 +3,6 @@
 namespace Nayjest\Querying\Handler\DoctrineDBAL;
 
 use Nayjest\Querying\Handler\AbstractHandler;
-use Nayjest\Querying\Handler\Priority;
 use Doctrine\DBAL\Query\QueryBuilder;
 use Nayjest\Querying\Operation\SortOperation;
 
@@ -14,24 +13,18 @@ use Nayjest\Querying\Operation\SortOperation;
  */
 class SortHandler extends AbstractHandler
 {
-    public function getPriority()
-    {
-        return Priority::MAIN;
-    }
+    use DatabaseOperationHandlerTrait;
 
     /**
-     * Applies operation to data source and returns modified data source.
-     *
-     * @param QueryBuilder $src
-     * @return QueryBuilder
+     * @param QueryBuilder $queryBuilder
      */
-    public function apply($src)
+    protected function applyInternal(QueryBuilder $queryBuilder)
     {
         /** @var SortOperation $operation */
         $operation = $this->operation;
-        $field = $operation->getField();
-        $order = $operation->getOrder();
-        $src->orderBy($field, $order);
-        return $src;
+        $queryBuilder->orderBy(
+            $operation->getField(),
+            $operation->getOrder()
+        );
     }
 }

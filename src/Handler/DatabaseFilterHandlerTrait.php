@@ -2,20 +2,16 @@
 
 namespace Nayjest\Querying\Handler;
 
-
 use Nayjest\Querying\Operation\FilterOperation;
 
-abstract class AbstractDatabaseFilterHandler extends AbstractHandler
+trait DatabaseFilterHandlerTrait
 {
-    public function getPriority()
-    {
-        return Priority::MAIN;
-    }
+    abstract protected function getOperation();
 
     protected function getOperatorAndValue()
     {
         /** @var  FilterOperation $operation */
-        $operation = $this->operation;
+        $operation = $this->getOperation();
         $operator = $operation->getOperator();
         $value = $operation->getValue();
         switch ($operator) {

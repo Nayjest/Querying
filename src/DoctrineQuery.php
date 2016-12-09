@@ -41,7 +41,7 @@ class DoctrineQuery extends AbstractQuery
             // This exception is expected, don't needs further processing
         }
         $this->removeOperation($operation);
-        if (!$readyQuery instanceof QueryBuilder) {
+        if (!($readyQuery instanceof QueryBuilder)) {
             throw new Exception("Failed to interrupt processing for extracting query object.");
         }
         return $readyQuery;

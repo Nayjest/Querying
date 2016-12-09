@@ -2,34 +2,32 @@
 
 namespace Nayjest\Querying\Handler\DoctrineDBAL;
 
-use Nayjest\Querying\Handler\AbstractDatabaseFilterHandler;
-
-use Nayjest\Querying\Handler\Priority;
+use Nayjest\Querying\Handler\AbstractHandler;
+use Nayjest\Querying\Handler\DatabaseFilterHandlerTrait;
 use Nayjest\Querying\Operation\FilterOperation;
 use Doctrine\DBAL\Query\QueryBuilder;
 
 /**
- * FilterOperation processing for DoctrineDataProvider.
+ * FilterOperation handler for Doctrine.
  *
  * @see FilterOperation
  */
-class FilterHandler extends AbstractDatabaseFilterHandler
+class FilterHandler extends AbstractHandler
 {
+    use DatabaseOperationHandlerTrait;
+    use DatabaseFilterHandlerTrait;
+
     /**
-     * Applies operation to data source and returns modified data source.
-     *
-     * @param QueryBuilder $src
-     * @return QueryBuilder
+     * @param QueryBuilder $queryBuilder
      */
-    public function apply($src)
+    protected function applyInternal(QueryBuilder $queryBuilder)
     {
         /** @var FilterOperation $operation */
         $operation = $this->operation;
         list($operator, $value) = $this->getOperatorAndValue();
         $fieldName = $operation->getField();
-        $parameterName = 'p'. md5($fieldName . $operator);
-        $src->andWhere("$fieldName $operator :$parameterName");
-        $src->setParameter($parameterName, $value);
-        return $src;
+        $parameterName = 'p' . md5($fieldName . $operator);
+        $queryBuilder->andWhere("$fieldName $operator :$parameterName");
+        $queryBuilder->setParameter($parameterName, $value);
     }
 }

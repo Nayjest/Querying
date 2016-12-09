@@ -2,8 +2,8 @@
 
 namespace Nayjest\Querying\Handler\Eloquent;
 
-use Nayjest\Querying\Handler\AbstractDatabaseFilterHandler;
-
+use Nayjest\Querying\Handler\AbstractHandler;
+use Nayjest\Querying\Handler\DatabaseFilterHandlerTrait;
 use Nayjest\Querying\Handler\Priority;
 use Nayjest\Querying\Operation\FilterOperation;
 use Illuminate\Database\Eloquent\Builder;
@@ -13,8 +13,15 @@ use Illuminate\Database\Eloquent\Builder;
  *
  * @see FilterOperation
  */
-class FilterHandler extends AbstractDatabaseFilterHandler
+class FilterHandler extends AbstractHandler
 {
+    use DatabaseFilterHandlerTrait;
+
+    public function getPriority()
+    {
+        return Priority::MAIN;
+    }
+
     /**
      * Applies operation to data source and returns modified data source.
      *
