@@ -6,7 +6,7 @@ use InvalidArgumentException;
 use Nayjest\Querying\Handler\AbstractHandler;
 use Nayjest\Querying\Handler\Priority;
 use Nayjest\Querying\Operation\FilterOperation;
-use Nayjest\Querying\RowInterface;
+use Nayjest\Querying\Row\RowInterface;
 
 /**
  * Class FilterHandler
