@@ -12,4 +12,7 @@ interface RowInterface
      */
     public function dynamicFieldsRegistry();
     public function getSrc();
+    public function extract();
+    public function toArray();
+    public function toObject();
 }

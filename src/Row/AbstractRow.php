@@ -31,4 +31,27 @@ abstract class AbstractRow implements RowInterface
     {
         return $this->dynamicFields;
     }
+
+    public function toArray()
+    {
+        return array_merge((array)$this->getSrc(), $this->dynamicFieldsRegistry()->getAll($this));
+    }
+
+    public function toObject()
+    {
+        $src = $this->getSrc();
+        if (!is_object($src)) {
+            $src = (object)$src;
+        }
+        $dynamicFields = $this->dynamicFieldsRegistry()->getAll($this);
+        foreach($dynamicFields as $key => $value) {
+            $src->{$key} = $value;
+        }
+        return $src;
+    }
+
+    public function extract()
+    {
+        return is_array($this->getSrc()) ? $this->toArray() : $this->toObject();
+    }
 }

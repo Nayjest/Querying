@@ -4,11 +4,12 @@ namespace Nayjest\Querying\Test;
 
 use Nayjest\Querying\Row\ArrayRow;
 use Nayjest\Querying\Row\DynamicFieldsRegistry;
+use Nayjest\Querying\Row\ObjectRow;
 
-class ArrayRowTest extends AbstractRowTest
+class ObjectRowTest extends AbstractRowTest
 {
     protected function make(DynamicFieldsRegistry $r)
     {
-        return new ArrayRow($r, ['test_field' => 7]);
+        return new ObjectRow($r, (object)['test_field' => 7]);
     }
 }

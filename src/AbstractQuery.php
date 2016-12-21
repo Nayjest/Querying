@@ -4,7 +4,6 @@ namespace Nayjest\Querying;
 
 use ArrayIterator;
 use Exception;
-use IteratorAggregate;
 use Nayjest\Querying\Handler\AbstractFactory;
 use Nayjest\Querying\Handler\HandlerInterface;
 use Nayjest\Querying\Operation\HydrateOperation;
@@ -12,7 +11,7 @@ use Nayjest\Querying\Operation\OperationInterface;
 use Nayjest\Querying\Row\DynamicFieldsRegistry;
 use Nayjest\Querying\Row\RowInterface;
 
-abstract class AbstractQuery implements IteratorAggregate
+abstract class AbstractQuery implements QueryInterface
 {
     private $dataSource;
     /**
@@ -55,6 +54,10 @@ abstract class AbstractQuery implements IteratorAggregate
 
     }
 
+    /**
+     * @param $data
+     * @return RowInterface[]|\Traversable
+     */
     protected function execute($data)
     {
         foreach ($this->getHandlers() as $handler) {
@@ -85,14 +88,6 @@ abstract class AbstractQuery implements IteratorAggregate
     }
 
     /**
-     * @return RowInterface[]|\Traversable
-     */
-    public function get()
-    {
-        return $this->execute($this->dataSource);
-    }
-
-    /**
      * @return RowInterface[]
      */
     public function getArray()
@@ -102,14 +97,18 @@ abstract class AbstractQuery implements IteratorAggregate
     }
 
     /**
-     * @return array
+     * @return RowInterface[]|\Traversable
      */
+    public function get()
+    {
+        return $this->execute($this->dataSource);
+    }
+
     public function getRaw()
     {
-        $data = $this->get();
         $res = [];
-        foreach ($data as $row) {
-            $res[] = $row->getSrc();
+        foreach ($this->get() as $row) {
+            $res[] = $row->extract();
         }
         return $res;
     }
