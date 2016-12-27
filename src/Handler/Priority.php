@@ -4,14 +4,12 @@ namespace Nayjest\Querying\Handler;
 
 class Priority
 {
-    const PREPARE = 10;
-    const MAIN_BEGIN = 10;
-    const MAIN = 50;
-    const MAIN_END = 80;
-    const HYDRATE = 99;
-    const POST_PROCESS_BEGIN = 100;
-    const POST_PROCESS = 110;
-    const POST_PROCESS_END = 200;
+    const CLONING = 100;
+    const PREPARE = 90;
+    const MAIN = 80;
+    const FETCH = 70;
+    const INITIALIZE_ROWS = 60;
+    const POST_PROCESS = 50;
 
     private function __construct()
     {

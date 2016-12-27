@@ -10,4 +10,9 @@ class ArrayQuery extends AbstractQuery
     {
         return new Factory();
     }
+
+    public function count()
+    {
+        return count($this->getArray());
+    }
 }

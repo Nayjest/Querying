@@ -1,6 +1,6 @@
 <?php
 
-namespace Nayjest\Querying\Handler\DoctrineDBAL;
+namespace Nayjest\Querying\Handler\Doctrine;
 
 use Nayjest\Querying\Handler\AbstractPaginateHandler;
 use Nayjest\Querying\Operation\PaginateOperation;

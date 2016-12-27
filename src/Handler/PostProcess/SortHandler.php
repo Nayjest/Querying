@@ -11,8 +11,9 @@ class SortHandler extends AbstractHandler
 {
     public function getPriority()
     {
-        return Priority::POST_PROCESS_END - 10;
+        return Priority::POST_PROCESS - 2;
     }
+
     /**
      * Applies operation to source and returns modified source.
      *

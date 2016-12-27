@@ -6,7 +6,7 @@ use ArrayIterator;
 use Exception;
 use Nayjest\Querying\Handler\AbstractFactory;
 use Nayjest\Querying\Handler\HandlerInterface;
-use Nayjest\Querying\Operation\HydrateOperation;
+use Nayjest\Querying\Operation\InitializeRowsOperation;
 use Nayjest\Querying\Operation\OperationInterface;
 use Nayjest\Querying\Row\DynamicFieldsRegistry;
 use Nayjest\Querying\Row\RowInterface;
@@ -35,8 +35,7 @@ abstract class AbstractQuery implements QueryInterface
     {
         $this->dataSource = $dataSource;
         $this->dynamicFields = new DynamicFieldsRegistry();
-        $this->operations = [new HydrateOperation($rowClass, $this->dynamicFields)];
-        $this->initialize();
+        $this->operations = [new InitializeRowsOperation($rowClass, $this->dynamicFields)];
     }
 
     public function getIterator()
@@ -47,11 +46,6 @@ abstract class AbstractQuery implements QueryInterface
         } else {
             return $data;
         }
-    }
-
-    protected function initialize()
-    {
-
     }
 
     /**
@@ -82,7 +76,7 @@ abstract class AbstractQuery implements QueryInterface
             if ($aPos == $bPos) {
                 return 0;
             }
-            return ($aPos < $bPos) ? -1 : 1;
+            return ($aPos < $bPos) ? 1 : -1;
         });
         return $handlers;
     }
@@ -145,6 +139,14 @@ abstract class AbstractQuery implements QueryInterface
             throw new Exception("Trying to remove unexisting operation from query");
         }
         return $this;
+    }
+
+    /**
+     * @return Operation\OperationInterface[]
+     */
+    public function getOperations()
+    {
+        return $this->operations;
     }
 
     public function getSrc()

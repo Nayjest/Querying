@@ -9,7 +9,7 @@ use Nayjest\Querying\Row\RowInterface;
 
 class AddFieldHandler extends AbstractHandler
 {
-    const PRIORITY = Priority::POST_PROCESS_BEGIN;
+    const PRIORITY = Priority::INITIALIZE_ROWS - 1;
 
     public function getPriority()
     {

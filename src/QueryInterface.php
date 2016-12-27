@@ -2,10 +2,11 @@
 
 namespace Nayjest\Querying;
 
+use Countable;
 use IteratorAggregate;
 use Nayjest\Querying\Operation\OperationInterface;
 
-interface QueryInterface extends IteratorAggregate
+interface QueryInterface extends IteratorAggregate, Countable
 {
     public function get();
 

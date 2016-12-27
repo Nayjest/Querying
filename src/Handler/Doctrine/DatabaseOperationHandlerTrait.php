@@ -1,6 +1,6 @@
 <?php
 
-namespace Nayjest\Querying\Handler\DoctrineDBAL;
+namespace Nayjest\Querying\Handler\Doctrine;
 
 use Doctrine\DBAL\Query\QueryBuilder;
 use Nayjest\Querying\Handler\Priority;

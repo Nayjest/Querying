@@ -19,6 +19,10 @@ class ArrayQueryTest extends PHPUnit_Framework_TestCase
         return new ArrayQuery($src, $rowClass);
     }
 
+    public function testCount()
+    {
+        self::assertEquals(3, $this->make([[1],[2],[3]])->count());
+    }
     public function testConstruct()
     {
         $this->make();

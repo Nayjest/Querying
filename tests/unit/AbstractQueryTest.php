@@ -3,6 +3,7 @@
 namespace Nayjest\Querying\Test;
 
 use Nayjest\Querying\AbstractQuery;
+use Nayjest\Querying\QueryInterface;
 use Nayjest\Querying\Row\RowInterface;
 use PHPUnit_Framework_TestCase;
 
@@ -10,7 +11,7 @@ abstract class AbstractQueryTest extends PHPUnit_Framework_TestCase
 {
     /**
      * @param null|mixed $data
-     * @return AbstractQuery
+     * @return QueryInterface
      */
     abstract public function make($data = null);
 

@@ -13,14 +13,14 @@ abstract class AbstracDatabaseQueryTest extends AbstractQueryTest
     public function testGetAll()
     {
         $q = $this->make($this->query());
-        $data = $q->getArray();
-        self::assertEquals(count($this->data()), count($data));
+        self::assertEquals(count($this->data()), count($q->getArray()));
+        self::assertEquals(count($this->data()), $q->count());
     }
 
     public function testGetCombined()
     {
         /**
-         * @var \Nayjest\Querying\DoctrineQuery|\Nayjest\Querying\EloquentQuery $q
+         * @var \Nayjest\Querying\DoctrineQuery|\Nayjest\Querying\IlluminateQuery $q
          */
         $q = $this->make($this->query());
         $q->addOperations([

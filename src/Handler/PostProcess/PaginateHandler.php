@@ -10,7 +10,7 @@ class PaginateHandler extends AbstractPaginateHandler
 {
     public function getPriority()
     {
-        return Priority::POST_PROCESS_END;
+        return Priority::POST_PROCESS - 4;
     }
 
     public function apply($dataSource)

@@ -6,9 +6,10 @@ use InvalidArgumentException;
 
 use Nayjest\Querying\Handler\PostProcess\AddFieldHandler;
 use Nayjest\Querying\Operation\AddFieldOperation;
+use Nayjest\Querying\Operation\CloneOperation;
 use Nayjest\Querying\Operation\CustomOperation;
 use Nayjest\Querying\Operation\DummyOperation;
-use Nayjest\Querying\Operation\HydrateOperation;
+use Nayjest\Querying\Operation\InitializeRowsOperation;
 use Nayjest\Querying\Operation\OperationInterface;
 
 abstract class AbstractFactory
@@ -22,9 +23,10 @@ abstract class AbstractFactory
     {
         return [
             DummyOperation::class => DummyHandler::class,
-            HydrateOperation::class => HydrateHandler::class,
+            InitializeRowsOperation::class => InitializeRowsHandler::class,
             AddFieldOperation::class => AddFieldHandler::class,
             CustomOperation::class => CustomHandler::class,
+            CloneOperation::class => CloneHandler::class,
         ];
     }
 

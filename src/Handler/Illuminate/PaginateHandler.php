@@ -1,6 +1,6 @@
 <?php
 
-namespace Nayjest\Querying\Handler\Eloquent;
+namespace Nayjest\Querying\Handler\Illuminate;
 
 use Nayjest\Querying\Handler\AbstractPaginateHandler;
 use Nayjest\Querying\Handler\Priority;

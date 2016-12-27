@@ -2,33 +2,33 @@
 
 namespace Nayjest\Querying;
 
-use Doctrine\DBAL\Query\QueryBuilder;
 use Exception;
-use Nayjest\Querying\Handler\Doctrine\Factory;
+use Illuminate\Database\Query\Builder;
+use Nayjest\Querying\Handler\Illuminate\Factory;
 use Nayjest\Querying\Row\ObjectRow;
 
-class DoctrineQuery extends AbstractDatabaseQuery
+class IlluminateQuery extends AbstractDatabaseQuery
 {
-    public function __construct(QueryBuilder $dataSource)
+    public function __construct(Builder $dataSource)
     {
         parent::__construct($dataSource, ObjectRow::class);
     }
 
     /**
-     * @return QueryBuilder
+     * @return Builder
      * @throws Exception
      */
-    public function getDoctrineQuery()
+    public function getIlluminateQuery()
     {
         return $this->getReadyQuery();
     }
+
     /**
      * @return string
-     * @throws Exception
      */
     public function getSQL()
     {
-        return $this->getDoctrineQuery()->getSQL();
+        return $this->getIlluminateQuery()->toSql();
     }
 
     /**
@@ -36,11 +36,7 @@ class DoctrineQuery extends AbstractDatabaseQuery
      */
     protected function getCountInternal()
     {
-        return (int)$this
-            ->getDoctrineQuery()
-            ->select('count(*) as row_count')
-            ->execute()
-            ->fetchColumn();
+        return $this->getIlluminateQuery()->count();
     }
 
     protected function getHandlerFactory()

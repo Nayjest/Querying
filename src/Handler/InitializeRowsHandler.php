@@ -2,11 +2,11 @@
 
 namespace Nayjest\Querying\Handler;
 
-use Nayjest\Querying\Operation\HydrateOperation;
+use Nayjest\Querying\Operation\InitializeRowsOperation;
 
-class HydrateHandler extends AbstractHandler
+class InitializeRowsHandler extends AbstractHandler
 {
-    const PRIORITY = Priority::HYDRATE;
+    const PRIORITY = Priority::INITIALIZE_ROWS;
 
     public function getPriority()
     {
@@ -15,7 +15,7 @@ class HydrateHandler extends AbstractHandler
 
     public function apply($dataSource)
     {
-        /** @var HydrateOperation $operation */
+        /** @var InitializeRowsOperation $operation */
         $operation = $this->operation;
         $rowClass = $operation->getRowClass();
         foreach($dataSource as $row) {

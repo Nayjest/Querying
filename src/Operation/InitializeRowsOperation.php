@@ -4,7 +4,7 @@ namespace Nayjest\Querying\Operation;
 
 use Nayjest\Querying\Row\DynamicFieldsRegistry;
 
-class HydrateOperation implements OperationInterface
+class InitializeRowsOperation implements OperationInterface
 {
     /**
      * @var string

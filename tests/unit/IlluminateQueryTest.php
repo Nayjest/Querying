@@ -4,9 +4,9 @@ namespace  Nayjest\Querying\Test;
 
 use Illuminate\Database\Capsule\Manager;
 use Illuminate\Database\Query\Builder;
-use Nayjest\Querying\EloquentQuery;
+use Nayjest\Querying\IlluminateQuery;
 
-class EloquentQueryTest extends AbstracDatabaseQueryTest
+class IlluminateQueryTest extends AbstracDatabaseQueryTest
 {
     /**
      * @var \Illuminate\Database\Connection
@@ -31,6 +31,6 @@ class EloquentQueryTest extends AbstracDatabaseQueryTest
         if ($src === null) {
             $src = $this->query();
         }
-        return new EloquentQuery($src);
+        return new IlluminateQuery($src);
     }
 }
